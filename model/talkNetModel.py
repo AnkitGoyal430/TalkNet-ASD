@@ -10,7 +10,7 @@ class talkNetModel(nn.Module):
         super(talkNetModel, self).__init__()
         # Visual Temporal Encoder
         self.visualFrontend  = visualFrontend() # Visual Frontend 
-        # self.visualFrontend.load_state_dict(torch.load('visual_frontend.pt', map_location="cuda"))
+        # self.visualFrontend.load_state_dict(torch.load('visual_frontend.pt', map_location="cpu"))
         # for param in self.visualFrontend.parameters():
         #     param.requires_grad = False       
         self.visualTCN       = visualTCN()      # Visual Temporal Network TCN

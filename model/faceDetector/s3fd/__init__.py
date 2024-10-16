@@ -5,9 +5,10 @@ import torch
 from torchvision import transforms
 from .nets import S3FDNet
 from .box_utils import nms_
+from pathlib import Path
 
-PATH_WEIGHT = 'model/faceDetector/s3fd/sfd_face.pth'
-if os.path.isfile(PATH_WEIGHT) == False:
+PATH_WEIGHT = str(Path(__file__).parent / 'sfd_face.pth')
+if not os.path.isfile(PATH_WEIGHT):
     Link = "1KafnHz7ccT-3IyddBsL5yi2xGtxAKypt"
     cmd = "gdown --id %s -O %s"%(Link, PATH_WEIGHT)
     subprocess.call(cmd, shell=True, stdout=None)
@@ -16,7 +17,7 @@ img_mean = np.array([104., 117., 123.])[:, np.newaxis, np.newaxis].astype('float
 
 class S3FD():
 
-    def __init__(self, device='cuda'):
+    def __init__(self, device='cpu'):
 
         tstamp = time.time()
         self.device = device
